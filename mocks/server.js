@@ -1,35 +1,6 @@
-const {ApolloServer, gql} = require('apollo-server');
-
-const typeDefs = gql`
-  type Query {
-    users: [User]
-    user(id: ID!): User
-  }
-
-  type User {
-    id: ID!
-    name: String!
-    favoriteFoods: [FavoriteFoodItem]
-  }
-
-  type FavoriteFoodItem {
-    id: ID!
-    foodItem: FoodItem!
-    user: User!
-    eatingFrequency: EatingFrequency!
-  }
-
-  type FoodItem {
-    id: ID!
-    name: String!
-  }
-
-  enum EatingFrequency {
-    DAILY
-    WEEKLY
-    MONTHLY
-  }
-`;
+const {ApolloServer} = require('apollo-server');
+const requireText = require('require-text');
+const typeDefs = requireText('./schema.graphql', require);
 
 const server = new ApolloServer({
   typeDefs,

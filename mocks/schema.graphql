@@ -1,0 +1,28 @@
+type Query {
+  users: [User]
+  user(id: ID!): User
+}
+
+type User {
+  id: ID!
+  name: String!
+  favoriteFoods: [FavoriteFoodItem]
+}
+
+type FavoriteFoodItem {
+  id: ID!
+  foodItem: FoodItem!
+  user: User!
+  eatingFrequency: EatingFrequency!
+}
+
+type FoodItem {
+  id: ID!
+  name: String!
+}
+
+enum EatingFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
