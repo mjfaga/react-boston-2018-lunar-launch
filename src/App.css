@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 80px;
 }
@@ -22,4 +18,6 @@
 
 .App-body {
   font-size: large;
+  width: 800px;
+  margin: auto auto;
 }
