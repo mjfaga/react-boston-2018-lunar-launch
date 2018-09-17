@@ -1,9 +1,10 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
 import UserList from './UserList';
 
 const AppBody = () => (
   <div className="App-body">
-    <UserList />
+    <Route component={UserList} />
   </div>
 );
 
