@@ -19,11 +19,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:mocks": "node mocks/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "apollo-server": "^2.0.8",
     "prettier": "^1.14.3"
   }
 }
