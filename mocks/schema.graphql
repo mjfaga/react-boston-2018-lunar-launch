@@ -3,6 +3,14 @@ type Query {
   user(id: ID!): User
 }
 
+type Mutation {
+  addFavoriteFood(
+    userId: ID!
+    name: String!
+    eatingFrequency: EatingFrequency
+  ): FavoriteFoodItem
+}
+
 type User {
   id: ID!
   name: String!
