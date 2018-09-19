@@ -30,6 +30,7 @@
   "devDependencies": {
     "apollo-server": "^2.0.8",
     "faker": "^4.1.0",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.4",
     "prettier": "^1.14.3"
   }
