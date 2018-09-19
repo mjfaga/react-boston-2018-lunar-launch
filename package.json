@@ -19,7 +19,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "react-test-renderer": "^16.5.2",
-    "require-text": "0.0.1"
+    "require-text": "0.0.1",
+    "waait": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
