@@ -12,7 +12,13 @@ npm install
 
 ### Starting the App
 
-The app can be started with:
+First, you will want to start the mock server:
+
+```sh
+npm run start:mocks
+```
+
+Then you can start the app with:
 
 ```sh
 npm start
