@@ -38,7 +38,7 @@ const updateFavoriteFoodList = userId => (cache, {data: {addFavoriteFood}}) => {
 
 const User = ({match}) => (
   <Query query={USER_QUERY} variables={{id: match.params.id}}>
-    {({data, loading}) => {
+    {({data, error, loading}) => {
       if (loading)
         return (
           <h2>
@@ -46,6 +46,7 @@ const User = ({match}) => (
             ...
           </h2>
         );
+      if (error) return <div>An error occurred.</div>;
 
       return (
         <React.Fragment>
@@ -67,4 +68,5 @@ const User = ({match}) => (
   </Query>
 );
 
+export {USER_QUERY};
 export default User;

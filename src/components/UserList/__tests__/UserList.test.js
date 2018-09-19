@@ -1,5 +1,5 @@
-import wait from 'waait';
 import React from 'react';
+import wait from 'waait';
 import renderer from 'react-test-renderer';
 import {MockedProvider} from 'react-apollo/test-utils';
 import {MemoryRouter} from 'react-router-dom';
@@ -76,6 +76,7 @@ describe('UserList', () => {
       });
     });
   });
+
   describe('there is a network error', () => {
     it('displays the error', async () => {
       const component = renderComponent([
