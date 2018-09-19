@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import FavoriteFoodItem from '../FavoriteFoodItem';
 
 describe('FavoriteFoodItem', () => {
-  it('renders a list item with a link to the user', () => {
+  it('renders a list item with a favorite food statement', () => {
     const favoriteFoodItem = {
       foodItem: {name: 'Delicious Food'},
       eatingFrequency: 'DAILY',
