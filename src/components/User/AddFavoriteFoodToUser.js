@@ -17,49 +17,82 @@ const updateFavoriteFoodList = userId => (cache, {data: {addFavoriteFood}}) => {
   });
 };
 
-const AddFavoriteFoodToUser = ({userId}) => (
-  <Mutation
-    mutation={ADD_FAVORITE_FOOD_MUTATION}
-    update={(cache, data) => updateFavoriteFoodList(userId)(cache, data)}
-  >
-    {addFavoriteFood => (
-      <form
-        ref={e => (this.form = e)}
-        onSubmit={e => {
-          e.preventDefault();
-          addFavoriteFood({
-            variables: {
-              userId: userId,
-              name: this.name.value,
-              eatingFrequency: this.eatingFrequency.value,
-            },
-          });
-          this.form.reset();
-        }}
+class AddFavoriteFoodToUser extends React.Component {
+  state = {};
+
+  setInput(val) {
+    this.setState({
+      ...this.state,
+      input: val,
+      submitted: false,
+    });
+  }
+
+  setSelect(val) {
+    this.setState({
+      ...this.state,
+      select: val,
+      submitted: false,
+    });
+  }
+
+  render() {
+    const {userId} = this.props;
+
+    return (
+      <Mutation
+        mutation={ADD_FAVORITE_FOOD_MUTATION}
+        update={(cache, data) => updateFavoriteFoodList(userId)(cache, data)}
       >
-        <input
-          id="name"
-          required
-          ref={e => (this.name = e)}
-          placeholder="Food Name"
-        />
-        <select
-          id="eatingFrequency"
-          ref={e => (this.eatingFrequency = e)}
-          required
-          defaultValue=""
-        >
-          <option value="" disabled hidden>
-            Select Eating Frequency...
-          </option>
-          <option value="DAILY">Daily</option>
-          <option value="WEEKLY">Weekly</option>
-          <option value="MONTHLY">Monthly</option>
-        </select>
-        <button type="submit">Add Favorite Food</button>
-      </form>
-    )}
-  </Mutation>
-);
+        {addFavoriteFood => (
+          <form
+            ref={e => (this.form = e)}
+            onSubmit={e => {
+              e.preventDefault();
+              if (!this.state.input || !this.state.select) {
+                this.setState({
+                  ...this.state,
+                  error: 'Food Name and Eating Frequency are required!',
+                });
+                return;
+              }
+              addFavoriteFood({
+                variables: {
+                  userId: userId,
+                  name: this.state.input,
+                  eatingFrequency: this.state.select,
+                },
+              });
+              this.form.reset();
+              this.setState({submitted: true});
+            }}
+          >
+            <input
+              id="name"
+              placeholder="Food Name"
+              onChange={e => this.setInput(e.target.value)}
+            />
+
+            <select
+              id="eatingFrequency"
+              defaultValue=""
+              onChange={e => this.setSelect(e.target.value)}
+            >
+              <option value="" disabled hidden>
+                Select Eating Frequency...
+              </option>
+              <option value="DAILY">Daily</option>
+              <option value="WEEKLY">Weekly</option>
+              <option value="MONTHLY">Monthly</option>
+            </select>
+            <button type="submit">Add Favorite Food</button>
+            {this.state.error ? <div>{this.state.error}</div> : null}
+            {this.state.submitted ? <div>You did it!</div> : null}
+          </form>
+        )}
+      </Mutation>
+    );
+  }
+}
 
 export default AddFavoriteFoodToUser;
