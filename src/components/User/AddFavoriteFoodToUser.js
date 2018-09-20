@@ -25,6 +25,7 @@ class AddFavoriteFoodToUser extends React.Component {
       ...this.state,
       input: val,
       submitted: false,
+      error: null,
     });
   }
 
@@ -33,6 +34,7 @@ class AddFavoriteFoodToUser extends React.Component {
       ...this.state,
       select: val,
       submitted: false,
+      error: null,
     });
   }
 
@@ -46,7 +48,6 @@ class AddFavoriteFoodToUser extends React.Component {
       >
         {addFavoriteFood => (
           <form
-            ref={e => (this.form = e)}
             onSubmit={e => {
               e.preventDefault();
               if (!this.state.input || !this.state.select) {
@@ -63,7 +64,7 @@ class AddFavoriteFoodToUser extends React.Component {
                   eatingFrequency: this.state.select,
                 },
               });
-              this.form.reset();
+              e.target.reset();
               this.setState({submitted: true});
             }}
           >
@@ -86,8 +87,12 @@ class AddFavoriteFoodToUser extends React.Component {
               <option value="MONTHLY">Monthly</option>
             </select>
             <button type="submit">Add Favorite Food</button>
-            {this.state.error ? <div>{this.state.error}</div> : null}
-            {this.state.submitted ? <div>You did it!</div> : null}
+            {this.state.error ? (
+              <div className="error-message ">{this.state.error}</div>
+            ) : null}
+            {this.state.submitted ? (
+              <div className="success-message">You did it!</div>
+            ) : null}
           </form>
         )}
       </Mutation>

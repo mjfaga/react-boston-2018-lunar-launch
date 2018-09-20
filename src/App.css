@@ -25,3 +25,13 @@
 form {
   margin-bottom: 10px;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.7em;
+}
+
+.success-message {
+  color: green;
+  font-size: 0.7em;
+}
