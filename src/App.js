@@ -2,8 +2,8 @@ import React from 'react';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
 import {BrowserRouter} from 'react-router-dom';
-import AppHeader from './components/AppHeader';
-import AppBody from './components/AppBody';
+import AppHeader from './AppHeader';
+import AppBody from './AppBody';
 import './App.css';
 
 const client = new ApolloClient({

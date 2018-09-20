@@ -1,5 +1,5 @@
 import React from 'react';
-import foodAndDrink from '../icons/foodAndDrink.svg';
+import foodAndDrink from './icons/foodAndDrink.svg';
 
 const AppHeader = () => (
   <header className="App-header">
