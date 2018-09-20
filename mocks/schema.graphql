@@ -7,7 +7,7 @@ type Mutation {
   addFavoriteFood(
     userId: ID!
     name: String!
-    eatingFrequency: EatingFrequency
+    eatingFrequency: EatingFrequency!
   ): FavoriteFoodItem
 }
 
