@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "apollo-boost": "^0.1.16",
+    "child_process": "^1.0.2",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "react": "^16.5.1",
