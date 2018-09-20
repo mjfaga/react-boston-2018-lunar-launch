@@ -7,7 +7,7 @@ import AppBody from './AppBody';
 import './App.css';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const App = () => (
