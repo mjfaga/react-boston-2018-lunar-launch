@@ -28,7 +28,6 @@ class AddFavoriteFoodToUser extends React.Component {
 
   setInput(val) {
     this.setState({
-      ...this.state,
       input: val,
       submitted: false,
       error: null,
@@ -37,10 +36,25 @@ class AddFavoriteFoodToUser extends React.Component {
 
   setSelect(val) {
     this.setState({
-      ...this.state,
       select: val,
       submitted: false,
       error: null,
+    });
+  }
+
+  setError() {
+    this.setState({
+      submitted: false,
+      error: 'Food Name and Eating Frequency are required!',
+    });
+  }
+
+  setSubmitted() {
+    this.setState({
+      input: null,
+      select: null,
+      error: null,
+      submitted: true,
     });
   }
 
@@ -54,10 +68,7 @@ class AddFavoriteFoodToUser extends React.Component {
             onSubmit={e => {
               e.preventDefault();
               if (!this.state.input || !this.state.select) {
-                this.setState({
-                  ...this.state,
-                  error: 'Food Name and Eating Frequency are required!',
-                });
+                this.setError();
                 return;
               }
               addFavoriteFood({
@@ -68,7 +79,7 @@ class AddFavoriteFoodToUser extends React.Component {
                 },
               });
               e.target.reset();
-              this.setState({submitted: true});
+              this.setSubmitted();
             }}
           >
             <input
