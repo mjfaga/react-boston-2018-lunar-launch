@@ -1,5 +1,6 @@
 import User from './User';
 import AddFavoriteFoodToUser from './AddFavoriteFoodToUser';
+import updateFavoriteFoodList from './updateFavoriteFoodList';
 
-export {AddFavoriteFoodToUser};
+export {AddFavoriteFoodToUser, updateFavoriteFoodList};
 export default User;

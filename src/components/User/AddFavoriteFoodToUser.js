@@ -3,20 +3,6 @@ import {Mutation} from 'react-apollo';
 import USER_QUERY from './USER_QUERY';
 import ADD_FAVORITE_FOOD_MUTATION from './ADD_FAVORITE_FOOD_MUTATION';
 
-const updateFavoriteFoodList = userId => (cache, {data: {addFavoriteFood}}) => {
-  const {user} = cache.readQuery({query: USER_QUERY, variables: {id: userId}});
-
-  cache.writeQuery({
-    query: USER_QUERY,
-    data: {
-      user: {
-        ...user,
-        favoriteFoods: [...user.favoriteFoods, addFavoriteFood],
-      },
-    },
-  });
-};
-
 class AddFavoriteFoodToUser extends React.Component {
   state = {};
 
@@ -39,13 +25,10 @@ class AddFavoriteFoodToUser extends React.Component {
   }
 
   render() {
-    const {userId} = this.props;
+    const {userId, update} = this.props;
 
     return (
-      <Mutation
-        mutation={ADD_FAVORITE_FOOD_MUTATION}
-        update={(cache, data) => updateFavoriteFoodList(userId)(cache, data)}
-      >
+      <Mutation mutation={ADD_FAVORITE_FOOD_MUTATION} update={update(userId)}>
         {addFavoriteFood => (
           <form
             onSubmit={e => {
