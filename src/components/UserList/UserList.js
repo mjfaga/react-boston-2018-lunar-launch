@@ -35,6 +35,6 @@ const UserList = () => (
     }}
   </Query>
 );
+UserList.query = USER_LIST_QUERY;
 
-export {USER_LIST_QUERY};
 export default UserList;

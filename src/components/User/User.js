@@ -1,7 +1,24 @@
 import React from 'react';
 import {Query} from 'react-apollo';
+import gql from 'graphql-tag';
 import FavoriteFoodList from '../FavoriteFoodList';
-import USER_QUERY from './USER_QUERY';
+
+const USER_QUERY = gql`
+  query User($id: ID!) {
+    user(id: $id) {
+      id
+      name
+      favoriteFoods {
+        id
+        foodItem {
+          id
+          name
+        }
+        eatingFrequency
+      }
+    }
+  }
+`;
 
 const User = ({userId}) => (
   <Query query={USER_QUERY} variables={{id: userId}}>
@@ -27,5 +44,6 @@ const User = ({userId}) => (
     }}
   </Query>
 );
+User.query = USER_QUERY;
 
 export default User;

@@ -1,7 +1,27 @@
 import React from 'react';
 import {Mutation} from 'react-apollo';
-import USER_QUERY from './USER_QUERY';
-import ADD_FAVORITE_FOOD_MUTATION from './ADD_FAVORITE_FOOD_MUTATION';
+import gql from 'graphql-tag';
+
+const ADD_FAVORITE_FOOD_MUTATION = gql`
+  mutation AddFavoriteFood(
+    $userId: ID!
+    $name: String!
+    $eatingFrequency: EatingFrequency!
+  ) {
+    addFavoriteFood(
+      userId: $userId
+      name: $name
+      eatingFrequency: $eatingFrequency
+    ) {
+      id
+      foodItem {
+        id
+        name
+      }
+      eatingFrequency
+    }
+  }
+`;
 
 class AddFavoriteFoodToUser extends React.Component {
   state = {};
@@ -82,5 +102,6 @@ class AddFavoriteFoodToUser extends React.Component {
     );
   }
 }
+AddFavoriteFoodToUser.query = ADD_FAVORITE_FOOD_MUTATION;
 
 export default AddFavoriteFoodToUser;

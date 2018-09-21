@@ -3,7 +3,6 @@ import wait from 'waait';
 import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
 import User from '../User';
-import USER_QUERY from '../USER_QUERY';
 
 const renderComponent = (userId, mocks) => {
   return mount(
@@ -18,7 +17,7 @@ describe('User', () => {
     it('displays loading indicator', () => {
       const userId = 123;
       const component = renderComponent(userId, [
-        {request: {query: USER_QUERY}, result: {data: {users: []}}},
+        {request: {query: User.query}, result: {data: {users: []}}},
       ]);
 
       expect(component.text()).toEqual('Grabbing favorite foods for 123...');
@@ -31,7 +30,7 @@ describe('User', () => {
       const mocks = [
         {
           request: {
-            query: USER_QUERY,
+            query: User.query,
             variables: {
               id: userId,
             },
@@ -61,7 +60,7 @@ describe('User', () => {
       const userId = 123;
       const component = renderComponent(userId, [
         {
-          request: {query: USER_QUERY, variables: {id: userId}},
+          request: {query: User.query, variables: {id: userId}},
           error: new Error('I broke'),
         },
       ]);
@@ -78,7 +77,7 @@ describe('User', () => {
       const userId = 123;
       const component = renderComponent(userId, [
         {
-          request: {query: USER_QUERY, variables: {id: userId}},
+          request: {query: User.query, variables: {id: userId}},
           result: {
             errors: [{message: 'Whoops!'}],
           },

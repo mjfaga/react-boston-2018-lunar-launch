@@ -4,8 +4,6 @@ import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
 import {MemoryRouter} from 'react-router-dom';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
-import ADD_FAVORITE_FOOD_MUTATION from '../ADD_FAVORITE_FOOD_MUTATION';
-import USER_QUERY from '../USER_QUERY';
 
 const renderComponent = (userId, update, mocks) => {
   return mount(
@@ -24,7 +22,7 @@ describe('AddFavoriteFoodToUser', () => {
       const mocks = [
         {
           request: {
-            query: ADD_FAVORITE_FOOD_MUTATION,
+            query: AddFavoriteFoodToUser.query,
             variables: {
               userId,
               name: newFoodName,

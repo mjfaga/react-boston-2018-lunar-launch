@@ -3,7 +3,7 @@ import wait from 'waait';
 import renderer from 'react-test-renderer';
 import {MockedProvider} from 'react-apollo/test-utils';
 import {MemoryRouter} from 'react-router-dom';
-import UserList, {USER_LIST_QUERY} from '../UserList';
+import UserList from '../UserList';
 import UserListItem from '../UserListItem';
 
 const renderComponent = mocks => {
@@ -20,7 +20,7 @@ describe('UserList', () => {
   describe('when the user list is loading', () => {
     it('displays loading indicator', () => {
       const component = renderComponent([
-        {request: {query: USER_LIST_QUERY}, result: {data: {users: []}}},
+        {request: {query: UserList.query}, result: {data: {users: []}}},
       ]);
 
       expect(component.toJSON().children).toContain('Loading...');
@@ -30,7 +30,7 @@ describe('UserList', () => {
   describe('when no users are returned', () => {
     it('display missing users message', async () => {
       const component = renderComponent([
-        {request: {query: USER_LIST_QUERY}, result: {data: {users: []}}},
+        {request: {query: UserList.query}, result: {data: {users: []}}},
       ]);
 
       await wait(0);
@@ -46,7 +46,7 @@ describe('UserList', () => {
       const mocks = [
         {
           request: {
-            query: USER_LIST_QUERY,
+            query: UserList.query,
           },
           result: {
             data: {
@@ -81,7 +81,7 @@ describe('UserList', () => {
     it('displays the error', async () => {
       const component = renderComponent([
         {
-          request: {query: USER_LIST_QUERY},
+          request: {query: UserList.query},
           error: new Error('I broke'),
         },
       ]);
@@ -96,7 +96,7 @@ describe('UserList', () => {
     it('displays the error', async () => {
       const component = renderComponent([
         {
-          request: {query: USER_LIST_QUERY},
+          request: {query: UserList.query},
           result: {
             errors: [{message: 'Whoops!'}],
           },

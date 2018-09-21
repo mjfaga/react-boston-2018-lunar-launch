@@ -1,10 +1,10 @@
-import USER_QUERY from './USER_QUERY';
+import User from './User';
 
 const updateFavoriteFoodList = userId => (cache, {data: {addFavoriteFood}}) => {
-  const {user} = cache.readQuery({query: USER_QUERY, variables: {id: userId}});
+  const {user} = cache.readQuery({query: User.query, variables: {id: userId}});
 
   cache.writeQuery({
-    query: USER_QUERY,
+    query: User.query,
     data: {
       user: {
         ...user,
