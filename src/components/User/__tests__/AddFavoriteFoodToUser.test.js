@@ -2,16 +2,14 @@ import React from 'react';
 import wait from 'waait';
 import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
-import {MemoryRouter} from 'react-router-dom';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
 
-const renderComponent = (userId, update, mocks) => {
-  return mount(
+const renderComponent = (userId, update, mocks) =>
+  mount(
     <MockedProvider mocks={mocks} addTypename={false}>
       <AddFavoriteFoodToUser userId={userId} update={update} />
     </MockedProvider>
   );
-};
 
 describe('AddFavoriteFoodToUser', () => {
   describe('when the user adds a new favorite food', () => {

@@ -18,9 +18,9 @@ const UserList = () => (
       if (loading) return <div>Loading...</div>;
       if (error && error.networkError) return <div>{error.message}</div>;
       if (error && error.graphQLErrors)
-        return <div>{'GraphQL error: ' + error.graphQLErrors[0].message}</div>;
+        return <div>{`GraphQL error: ${error.graphQLErrors[0].message}`}</div>;
       if (data.users.length === 0)
-        return <div>You don't have any users yet!</div>;
+        return <div>You don&#39;t have any users yet!</div>;
 
       return (
         <React.Fragment>

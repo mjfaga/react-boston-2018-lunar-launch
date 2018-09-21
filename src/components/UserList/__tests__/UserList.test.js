@@ -6,15 +6,14 @@ import {MemoryRouter} from 'react-router-dom';
 import UserList from '../UserList';
 import UserListItem from '../UserListItem';
 
-const renderComponent = mocks => {
-  return renderer.create(
+const renderComponent = mocks =>
+  renderer.create(
     <MockedProvider mocks={mocks} addTypename={false}>
       <MemoryRouter>
         <UserList />
       </MemoryRouter>
     </MockedProvider>
   );
-};
 
 describe('UserList', () => {
   describe('when the user list is loading', () => {

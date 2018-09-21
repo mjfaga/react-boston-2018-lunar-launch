@@ -1,7 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import FavoriteFoodList from '../FavoriteFoodList';
-import FavoriteFoodItem from '../FavoriteFoodItem';
 
 describe('FavoriteFoodList', () => {
   describe('when there are no food items', () => {
@@ -16,7 +15,7 @@ describe('FavoriteFoodList', () => {
     });
   });
 
-  describe('when there are no food items', () => {
+  describe('when there are food items', () => {
     it('renders a list of FavoriteFoodItems', () => {
       const favoriteFoods = [{first: 'firstItem'}, {second: 'secondItem'}];
 

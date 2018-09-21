@@ -36,7 +36,7 @@ const User = ({userId}) => (
         <React.Fragment>
           <h2>
             {data.user.name}
-            's favorite foods:
+            &#39;s favorite foods:
           </h2>
           <FavoriteFoodList favoriteFoods={data.user.favoriteFoods} />
         </React.Fragment>

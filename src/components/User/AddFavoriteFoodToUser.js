@@ -73,7 +73,7 @@ class AddFavoriteFoodToUser extends React.Component {
               }
               addFavoriteFood({
                 variables: {
-                  userId: userId,
+                  userId,
                   name: this.state.input,
                   eatingFrequency: this.state.select,
                 },

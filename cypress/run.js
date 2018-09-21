@@ -7,8 +7,10 @@ let mockGqlServer = null;
 function startServer() {
   webServer = spawn('npm start', {shell: true});
   mockGqlServer = spawn('npm run start:mocks', {shell: true});
+  // eslint-disable-next-line no-console
   console.log(`started web server, pid=${webServer.pid}`);
-  console.log(`started mock server, pid=${mockGqlService.pid}`);
+  // eslint-disable-next-line no-console
+  console.log(`started mock server, pid=${mockGqlServer.pid}`);
 }
 
 function stopServer() {

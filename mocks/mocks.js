@@ -1,5 +1,6 @@
+/* eslint-disable import/no-commonjs */
 const {MockList} = require('apollo-server');
-var faker = require('faker');
+const faker = require('faker');
 
 const mocks = {
   FoodItem: () => ({
@@ -12,7 +13,7 @@ const mocks = {
       'Pad Se Ew',
     ]),
   }),
-  User: (parent, context, args) => ({
+  User: () => ({
     name: faker.name.findName(),
     favoriteFoods: () => new MockList(5),
   }),

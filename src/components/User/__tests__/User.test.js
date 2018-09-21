@@ -4,13 +4,12 @@ import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
 import User from '../User';
 
-const renderComponent = (userId, mocks) => {
-  return mount(
+const renderComponent = (userId, mocks) =>
+  mount(
     <MockedProvider mocks={mocks} addTypename={false}>
       <User userId={userId} />
     </MockedProvider>
   );
-};
 
 describe('User', () => {
   describe('when the user is loading', () => {

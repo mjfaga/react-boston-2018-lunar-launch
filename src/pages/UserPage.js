@@ -12,7 +12,7 @@ const UserPage = ({match}) => (
       userId={match.params.id}
       update={updateFavoriteFoodList}
     />
-    <Link to={`/`}>&lt;&lt; Back</Link>
+    <Link to="/">&lt;&lt; Back</Link>
   </React.Fragment>
 );
 
