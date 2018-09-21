@@ -28,7 +28,9 @@
     "start:mocks": "nodemon --watch mocks mocks/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier 'src/**/*.js' --list-different",
+    "prettier:fix": "prettier 'src/**/*.js' --write"
   },
   "devDependencies": {
     "apollo-server": "^2.0.8",
