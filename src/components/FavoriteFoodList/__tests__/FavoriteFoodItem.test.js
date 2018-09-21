@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {mount} from 'enzyme';
 import FavoriteFoodItem from '../FavoriteFoodItem';
 
 describe('FavoriteFoodItem', () => {
@@ -9,12 +9,12 @@ describe('FavoriteFoodItem', () => {
       eatingFrequency: 'DAILY',
     };
 
-    const component = renderer.create(
+    const component = mount(
       <FavoriteFoodItem favoriteFoodItem={favoriteFoodItem} />
     );
 
-    const link = component.root.findByType('li');
-    expect(link.children.join('')).toEqual(
+    const listItem = component.find('li');
+    expect(listItem.text()).toEqual(
       'I like to eat Delicious Food on a daily basis'
     );
   });
