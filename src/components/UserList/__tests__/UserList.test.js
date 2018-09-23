@@ -8,11 +8,11 @@ import UserListItem from '../UserListItem';
 
 const renderComponent = mocks =>
   renderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <MemoryRouter>
+    <MemoryRouter>
+      <MockedProvider mocks={mocks} addTypename={false}>
         <UserList />
-      </MemoryRouter>
-    </MockedProvider>
+      </MockedProvider>
+    </MemoryRouter>
   );
 
 describe('UserList', () => {
