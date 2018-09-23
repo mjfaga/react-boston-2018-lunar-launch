@@ -23,14 +23,11 @@ const UserList = () => (
         return <div>You don&#39;t have any users yet!</div>;
 
       return (
-        <React.Fragment>
-          <h2>Users</h2>
-          <ul className="user-list">
-            {data.users.map((user, index) => (
-              <UserListItem user={user} key={index} />
-            ))}
-          </ul>
-        </React.Fragment>
+        <ul className="user-list">
+          {data.users.map((user, index) => (
+            <UserListItem user={user} key={index} />
+          ))}
+        </ul>
       );
     }}
   </Query>
