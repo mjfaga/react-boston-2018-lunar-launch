@@ -36,6 +36,12 @@ module.exports = {
         specialLink: ['to'],
       },
     ],
+    'prettier/prettier': [
+      'error',
+      {
+        printWidth: 80,
+      },
+    ],
   },
   parser: 'babel-eslint',
   root: true,
