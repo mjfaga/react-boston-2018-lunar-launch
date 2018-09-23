@@ -26,7 +26,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:mocks": "nodemon --watch mocks mocks/server.js",
+    "start:apollo": "nodemon --watch mocks mocks/server.js",
+    "start:apollomocks": "nodemon --watch mocks mocks/serverWithMocks.js",
+    "start:apollolunar": "nodemon --watch mocks mocks/serverWithLunar.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
