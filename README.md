@@ -15,7 +15,7 @@ npm install
 First, you will want to start the mock server:
 
 ```sh
-npm run start:mocks
+npm run start:apollolunar
 ```
 
 Then you can start the app with:
