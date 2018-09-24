@@ -113,6 +113,6 @@ class AddFavoriteFoodToUser extends React.Component {
     );
   }
 }
-AddFavoriteFoodToUser.query = ADD_FAVORITE_FOOD_MUTATION;
+AddFavoriteFoodToUser.mutation = ADD_FAVORITE_FOOD_MUTATION;
 
 export default AddFavoriteFoodToUser;

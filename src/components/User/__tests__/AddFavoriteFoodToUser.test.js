@@ -20,7 +20,7 @@ describe('AddFavoriteFoodToUser', () => {
       const mocks = [
         {
           request: {
-            query: AddFavoriteFoodToUser.query,
+            query: AddFavoriteFoodToUser.mutation,
             variables: {
               userId,
               name: newFoodName,
