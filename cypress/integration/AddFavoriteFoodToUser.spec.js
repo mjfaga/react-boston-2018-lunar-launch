@@ -42,21 +42,26 @@ describe('Adding Favorite Foods to a User', () => {
           }),
         }),
         Mutation: () => ({
-          addFavoriteFood: () => ({
+          addFavoriteFood: (parent, args) => ({
             foodItem: {
-              name: 'Mac & Cheese',
+              name: args.name,
             },
-            eatingFrequency: 'WEEKLY',
+            eatingFrequency: args.eatingFrequency,
           }),
         }),
       });
       cy.visit('http://localhost:3000/user/1');
-      cy.get('input').type('Mac & Cheese');
-      cy.get('select').select('WEEKLY');
+      cy.contains('div', 'No favorites yet!');
+      cy.get('input').type('Fluffernutter Sandwich');
+      cy.get('select').select('DAILY');
       cy.get('button').click();
-      cy.contains('li', 'I like to eat Mac & Cheese on a weekly basis');
+      cy.contains(
+        'li',
+        'I like to eat Fluffernutter Sandwich on a daily basis'
+      );
       cy.get('input').should('have.value', '');
       cy.get('select').should('have.value', null);
+      cy.contains('div', 'You did it!');
     });
   });
 });
