@@ -18,11 +18,41 @@ const renderComponent = mocks =>
 describe('UserList', () => {
   describe('when the user list is loading', () => {
     it('displays loading indicator', () => {
-      const component = renderComponent([
-        {request: {query: UserList.query}, result: {data: {users: []}}},
-      ]);
+      const component = renderComponent([{request: {query: UserList.query}}]);
 
       expect(component.toJSON().children).toContain('Loading...');
+    });
+  });
+
+  describe('there is a network error', () => {
+    it('displays the error', async () => {
+      const component = renderComponent([
+        {
+          request: {query: UserList.query},
+          error: new Error('I broke'),
+        },
+      ]);
+
+      await wait(0);
+
+      expect(component.toJSON().children).toContain('Network error: I broke');
+    });
+  });
+
+  describe('there is a GraphQL error', () => {
+    it('displays the error', async () => {
+      const component = renderComponent([
+        {
+          request: {query: UserList.query},
+          result: {
+            errors: [{message: 'Whoops!'}],
+          },
+        },
+      ]);
+
+      await wait(0);
+
+      expect(component.toJSON().children).toContain('GraphQL error: Whoops!');
     });
   });
 
@@ -73,38 +103,6 @@ describe('UserList', () => {
           name: 'Craig',
         },
       });
-    });
-  });
-
-  describe('there is a network error', () => {
-    it('displays the error', async () => {
-      const component = renderComponent([
-        {
-          request: {query: UserList.query},
-          error: new Error('I broke'),
-        },
-      ]);
-
-      await wait(0);
-
-      expect(component.toJSON().children).toContain('Network error: I broke');
-    });
-  });
-
-  describe('there is a GraphQL error', () => {
-    it('displays the error', async () => {
-      const component = renderComponent([
-        {
-          request: {query: UserList.query},
-          result: {
-            errors: [{message: 'Whoops!'}],
-          },
-        },
-      ]);
-
-      await wait(0);
-
-      expect(component.toJSON().children).toContain('GraphQL error: Whoops!');
     });
   });
 });
