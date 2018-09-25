@@ -1,11 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import wait from 'waait';
+import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
 
 const renderComponent = (userId, update, mocks) =>
-  renderer.create(
+  mount(
     <MockedProvider mocks={mocks} addTypename={false}>
       <AddFavoriteFoodToUser userId={userId} update={update} />
     </MockedProvider>
@@ -46,28 +46,19 @@ describe('AddFavoriteFoodToUser', () => {
 
       const component = renderComponent(userId, updateSpy, mocks);
 
-      component.root.findByType('input').props.onChange({
-        target: {value: newFoodName},
-      });
+      component
+        .find('input')
+        .simulate('change', {target: {value: newFoodName}});
+      component
+        .find('select')
+        .simulate('change', {target: {value: newEatingFrequency}});
+      component.find('form').simulate('submit');
 
-      component.root.findByType('select').props.onChange({
-        target: {value: newEatingFrequency},
-      });
+      await wait(0);
+      component.update();
 
-      const formResetSpy = jest.fn();
-      const formPreventDefaultSpy = jest.fn();
-      component.root.findByType('form').props.onSubmit({
-        preventDefault: formPreventDefaultSpy,
-        target: {reset: formResetSpy},
-      });
-
-      expect(formPreventDefaultSpy).toHaveBeenCalled();
       expect(updateSpy).toHaveBeenCalledWith(userId);
-      expect(
-        component.root.find(el => el.props.className === 'success-message')
-          .children
-      ).toContain('You did it!');
-      expect(formResetSpy).toHaveBeenCalled();
+      expect(component.find('.success-message').text()).toEqual('You did it!');
     });
   });
 });
