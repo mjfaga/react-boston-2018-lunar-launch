@@ -1,0 +1,27 @@
+cy.mock({
+  Query: () => ({
+    user: () => ({
+      favoriteFoods: [{}, {}],
+    }),
+  }),
+});
+
+favoriteFoods: [
+  {foodItem: {name: 'Spaghetti'}, eatingFrequency: 'WEEKLY'},
+  {foodItem: {name: 'Coconut Water'}, eatingFrequency: 'DAILY'},
+],
+
+cy.contains('li', 'I like to eat Spaghetti on a weekly basis');
+cy.contains('li', 'I like to eat Coconut Water on a daily basis');
+
+cy.get('input').type('Fluffernutter Sandwich');
+cy.get('select').select('DAILY');
+
+cy.contains('li', 'I like to eat Fluffernutter Sandwich on a daily basis');
+
+addFavoriteFood: (parent, args) => ({
+  foodItem: {
+    name: args.name,
+  },
+  eatingFrequency: args.eatingFrequency,
+}),
