@@ -59,10 +59,13 @@ class AddFavoriteFoodToUser extends React.Component {
   }
 
   render() {
-    const {userId, update} = this.props;
+    const {userId, updateWrapper} = this.props;
 
     return (
-      <Mutation mutation={ADD_FAVORITE_FOOD_MUTATION} update={update(userId)}>
+      <Mutation
+        mutation={ADD_FAVORITE_FOOD_MUTATION}
+        update={updateWrapper(userId)}
+      >
         {addFavoriteFood => (
           <form
             onSubmit={e => {

@@ -10,7 +10,7 @@ const UserPage = ({match}) => (
     <User userId={match.params.id} />
     <AddFavoriteFoodToUser
       userId={match.params.id}
-      update={updateFavoriteFoodList}
+      updateWrapper={updateFavoriteFoodList}
     />
     <Link to="/">&lt;&lt; Back</Link>
   </React.Fragment>

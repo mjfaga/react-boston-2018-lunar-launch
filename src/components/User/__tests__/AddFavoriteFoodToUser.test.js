@@ -1,13 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import wait from 'waait';
 import {MockedProvider} from 'react-apollo/test-utils';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
 
-const renderComponent = (userId, update, mocks) =>
+const renderComponent = (userId, updateWrapper, mocks) =>
   renderer.create(
     <MockedProvider mocks={mocks} addTypename={false}>
-      <AddFavoriteFoodToUser userId={userId} update={update} />
+      <AddFavoriteFoodToUser userId={userId} updateWrapper={updateWrapper} />
     </MockedProvider>
   );
 
@@ -43,8 +42,9 @@ describe('AddFavoriteFoodToUser', () => {
       ];
 
       const updateSpy = jest.fn();
+      const updateWrapper = () => updateSpy();
 
-      const component = renderComponent(userId, updateSpy, mocks);
+      const component = renderComponent(userId, updateWrapper, mocks);
 
       component.root.findByType('input').props.onChange({
         target: {value: newFoodName},
@@ -62,7 +62,7 @@ describe('AddFavoriteFoodToUser', () => {
       });
 
       expect(formPreventDefaultSpy).toHaveBeenCalled();
-      expect(updateSpy).toHaveBeenCalledWith(userId);
+      expect(updateSpy).toHaveBeenCalled();
       expect(
         component.root.find(el => el.props.className === 'success-message')
           .children

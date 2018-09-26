@@ -4,10 +4,10 @@ import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
 
-const renderComponent = (userId, update, mocks) =>
+const renderComponent = (userId, updateWrapper, mocks) =>
   mount(
     <MockedProvider mocks={mocks} addTypename={false}>
-      <AddFavoriteFoodToUser userId={userId} update={update} />
+      <AddFavoriteFoodToUser userId={userId} updateWrapper={updateWrapper} />
     </MockedProvider>
   );
 
@@ -43,8 +43,9 @@ describe('AddFavoriteFoodToUser', () => {
       ];
 
       const updateSpy = jest.fn();
+      const updateWrapper = () => updateSpy;
 
-      const component = renderComponent(userId, updateSpy, mocks);
+      const component = renderComponent(userId, updateWrapper, mocks);
 
       component
         .find('input')
@@ -57,7 +58,7 @@ describe('AddFavoriteFoodToUser', () => {
       await wait(0);
       component.update();
 
-      expect(updateSpy).toHaveBeenCalledWith(userId);
+      expect(updateSpy).toHaveBeenCalled();
       expect(component.find('.success-message').text()).toEqual('You did it!');
     });
   });
