@@ -20,7 +20,7 @@ describe('UserList', () => {
     it('displays loading indicator', () => {
       const component = renderComponent([{request: {query: UserList.query}}]);
 
-      expect(component.toJSON().children).toContain('Loading...');
+      expect(component.toJSON().children.join('')).toEqual('Loading...');
     });
   });
 
@@ -35,7 +35,9 @@ describe('UserList', () => {
 
       await wait(0);
 
-      expect(component.toJSON().children).toContain('Network error: I broke');
+      expect(component.toJSON().children.join('')).toEqual(
+        'Network error: I broke'
+      );
     });
   });
 
@@ -52,7 +54,9 @@ describe('UserList', () => {
 
       await wait(0);
 
-      expect(component.toJSON().children).toContain('GraphQL error: Whoops!');
+      expect(component.toJSON().children.join('')).toEqual(
+        'GraphQL error: Whoops!'
+      );
     });
   });
 
@@ -64,7 +68,7 @@ describe('UserList', () => {
 
       await wait(0);
 
-      expect(component.toJSON().children).toContain(
+      expect(component.toJSON().children.join('')).toEqual(
         "You don't have any users yet!"
       );
     });
