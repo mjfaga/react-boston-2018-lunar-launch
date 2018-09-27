@@ -83,7 +83,7 @@ describe('UserList', () => {
           },
           result: {
             data: {
-              users: [{id: 1, name: 'Mark'}, {id: 2, name: 'Craig'}],
+              users: [{id: 1, name: 'Mark'}, {id: 2, name: 'Hillary'}],
             },
           },
         },
@@ -104,7 +104,7 @@ describe('UserList', () => {
       expect(userListItems[1].props).toEqual({
         user: {
           id: 2,
-          name: 'Craig',
+          name: 'Hillary',
         },
       });
     });
