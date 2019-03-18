@@ -1,6 +1,8 @@
 # React, GraphQL, and Lunar Sample App
 
-Check out the slide deck from React Boston 2018 on [Determistic Mocking with GraphQL & Apollo: Lunar Launch](https://github.com/mjfaga/react-boston-2018-lunar-launch/tree/master/presentation)
+Check out the materials from React Boston 2018:
+* [Video Recording](https://www.youtube.com/watch?v=K445DtQ5oHY)
+* Slide Deck: [Determistic Mocking with GraphQL & Apollo: Lunar Launch](https://github.com/mjfaga/react-boston-2018-lunar-launch/tree/master/presentation)
 
 ## Setup
 
