@@ -6,10 +6,10 @@ Check out the slide deck from React Boston 2018 on [Determistic Mocking with Gra
 
 ### Dependencies
 
-This project uses [npm](https://www.npmjs.com/get-npm) to manage dependencies.
+This project uses [yarn](https://yarnpkg.com/en/docs/install#mac-stable) to manage dependencies.
 
 ```sh
-npm install
+yarn install
 ```
 
 ### Starting the App
@@ -17,11 +17,11 @@ npm install
 First, you will want to start the mock server:
 
 ```sh
-npm run start:apollolunar
+yarn run start:apollolunar
 ```
 
 Then you can start the app with:
 
 ```sh
-npm start
+yarn start
 ```
