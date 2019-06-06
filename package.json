@@ -31,6 +31,8 @@
     "start:apollolunar": "nodemon --watch mocks mocks/serverWithLunar.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

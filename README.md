@@ -27,3 +27,25 @@ Then you can start the app with:
 ```sh
 yarn start
 ```
+
+## Testing the App
+
+### Run unit tests:
+```sh
+yarn test
+```
+
+### Run Cypress Tests:
+
+First, you need to get the app started up per the instructions above. Once both
+the mocks and web server are running, you can either:
+
+Start the client:
+```sh
+yarn run cypress:open
+```
+
+or run in the console
+```sh
+yarn run cypress:run
+```
