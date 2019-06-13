@@ -3,7 +3,7 @@ import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
 import FavoriteFoodList, {
   FAVORITE_FOODS_LIST_FRAGMENT,
-} from '../FavoriteFoodList';
+} from './FavoriteFoodList';
 
 const USER_QUERY = gql`
   query User($id: ID!) {

@@ -1,9 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import User, {
-  AddFavoriteFoodToUser,
-  updateFavoriteFoodList,
-} from '../components/User';
+import AddFavoriteFoodToUser from '../components/AddFavoriteFoodToUser';
+import updateFavoriteFoodList from '../components/updateFavoriteFoodList';
+import User from '../components/User';
 
 const UserPage = ({match}) => (
   <React.Fragment>
