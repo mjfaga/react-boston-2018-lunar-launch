@@ -3,13 +3,6 @@ import renderer from 'react-test-renderer';
 import {MockedProvider} from 'react-apollo/test-utils';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
 
-const renderComponent = (userId, updateWrapper, mocks) =>
-  renderer.create(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <AddFavoriteFoodToUser userId={userId} updateWrapper={updateWrapper} />
-    </MockedProvider>
-  );
-
 describe('AddFavoriteFoodToUser', () => {
   describe('when the user adds a new favorite food', () => {
     it('Submits the mutation and renders success', async () => {
@@ -41,10 +34,11 @@ describe('AddFavoriteFoodToUser', () => {
         },
       ];
 
-      const updateSpy = jest.fn();
-      const updateWrapper = () => updateSpy();
-
-      const component = renderComponent(userId, updateWrapper, mocks);
+      const component = renderer.create(
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <AddFavoriteFoodToUser userId={userId} updateCallback={() => {}} />
+        </MockedProvider>
+      );
 
       component.root.findByType('input').props.onChange({
         target: {value: newFoodName},
@@ -62,7 +56,6 @@ describe('AddFavoriteFoodToUser', () => {
       });
 
       expect(formPreventDefaultSpy).toHaveBeenCalled();
-      expect(updateSpy).toHaveBeenCalled();
       expect(
         component.root.find(el => el.props.className === 'success-message')
           .children

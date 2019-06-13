@@ -1,15 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import AddFavoriteFoodToUser from '../components/AddFavoriteFoodToUser';
-import updateFavoriteFoodList from '../components/updateFavoriteFoodList';
-import User from '../components/User';
+import User, {addNewFoodCallback} from '../components/User';
 
-const UserPage = ({match}) => (
+const UserPage = ({
+  match: {
+    params: {id: userId},
+  },
+}) => (
   <React.Fragment>
-    <User userId={match.params.id} />
+    <User userId={userId} />
     <AddFavoriteFoodToUser
-      userId={match.params.id}
-      updateWrapper={updateFavoriteFoodList}
+      userId={userId}
+      updateCallback={addNewFoodCallback(userId)}
     />
     <Link to="/">&lt;&lt; Back</Link>
   </React.Fragment>

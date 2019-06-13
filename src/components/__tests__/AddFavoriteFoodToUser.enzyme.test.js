@@ -4,13 +4,6 @@ import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
 import AddFavoriteFoodToUser from '../AddFavoriteFoodToUser';
 
-const renderComponent = (userId, updateWrapper, mocks) =>
-  mount(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <AddFavoriteFoodToUser userId={userId} updateWrapper={updateWrapper} />
-    </MockedProvider>
-  );
-
 describe('AddFavoriteFoodToUser', () => {
   describe('when the user adds a new favorite food', () => {
     it('Submits the mutation and renders success', async () => {
@@ -42,10 +35,16 @@ describe('AddFavoriteFoodToUser', () => {
         },
       ];
 
-      const updateSpy = jest.fn();
-      const updateWrapper = () => updateSpy;
+      const updateCallback = jest.fn();
 
-      const component = renderComponent(userId, updateWrapper, mocks);
+      const component = mount(
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <AddFavoriteFoodToUser
+            userId={userId}
+            updateCallback={updateCallback}
+          />
+        </MockedProvider>
+      );
 
       component
         .find('input')
@@ -58,7 +57,7 @@ describe('AddFavoriteFoodToUser', () => {
       await wait(0);
       component.update();
 
-      expect(updateSpy).toHaveBeenCalled();
+      expect(updateCallback).toHaveBeenCalled();
       expect(component.find('.success-message').text()).toEqual('You did it!');
     });
   });

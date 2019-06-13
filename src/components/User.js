@@ -17,6 +17,23 @@ const USER_QUERY = gql`
   ${FAVORITE_FOODS_LIST_FRAGMENT}
 `;
 
+export const addNewFoodCallback = userId => (
+  cache,
+  {data: {addFavoriteFood}}
+) => {
+  const {user} = cache.readQuery({query: USER_QUERY, variables: {id: userId}});
+
+  cache.writeQuery({
+    query: USER_QUERY,
+    data: {
+      user: {
+        ...user,
+        favoriteFoods: [...user.favoriteFoods, addFavoriteFood],
+      },
+    },
+  });
+};
+
 const User = ({userId}) => (
   <Query query={USER_QUERY} variables={{id: userId}}>
     {({data, error, loading}) => {
@@ -41,6 +58,7 @@ const User = ({userId}) => (
     }}
   </Query>
 );
+
 User.query = USER_QUERY;
 
 export default User;

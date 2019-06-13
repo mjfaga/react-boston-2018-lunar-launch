@@ -2,7 +2,7 @@ import React from 'react';
 import wait from 'waait';
 import {mount} from 'enzyme';
 import {MockedProvider} from 'react-apollo/test-utils';
-import User from '../User';
+import User, {addNewFoodCallback} from '../User';
 
 const renderComponent = (userId, mocks) =>
   mount(
@@ -86,6 +86,36 @@ describe('User', () => {
       component.update();
 
       expect(component.text()).toEqual('An error occurred.');
+    });
+  });
+});
+
+describe('addNewFoodCallback', () => {
+  it('reads and writes to the cache', () => {
+    const userId = 123;
+    const cache = {
+      readQuery: jest.fn(() => ({
+        user: {id: userId, favoriteFoods: [{some: 'property'}]},
+      })),
+      writeQuery: jest.fn(),
+    };
+    const data = {data: {addFavoriteFood: {new: 'property'}}};
+
+    addNewFoodCallback(123)(cache, data);
+
+    const query = expect.any(Object);
+    expect(cache.readQuery).toHaveBeenCalledWith({
+      query,
+      variables: {id: userId},
+    });
+    expect(cache.writeQuery).toHaveBeenCalledWith({
+      query,
+      data: {
+        user: {
+          id: userId,
+          favoriteFoods: [{some: 'property'}, {new: 'property'}],
+        },
+      },
     });
   });
 });
