@@ -26,6 +26,7 @@ describe('User', () => {
   describe('when a user is returned', () => {
     it('renders the users profile', async () => {
       const userId = 123;
+      const user = {id: userId, name: 'Mark', favoriteFoods: []};
       const mocks = [
         {
           request: {
@@ -36,7 +37,7 @@ describe('User', () => {
           },
           result: {
             data: {
-              user: {id: userId, name: 'Mark', favoriteFoods: []},
+              user,
             },
           },
         },
@@ -48,9 +49,7 @@ describe('User', () => {
       component.update();
 
       expect(component.find('h2').text()).toEqual("Mark's favorite foods:");
-      expect(component.find('FavoriteFoodList').props()).toEqual({
-        favoriteFoods: [],
-      });
+      expect(component.find('FavoriteFoodList').props()).toEqual({user});
     });
   });
 

@@ -1,23 +1,20 @@
 import React from 'react';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
-import FavoriteFoodList from '../FavoriteFoodList';
+import FavoriteFoodList, {
+  FAVORITE_FOODS_LIST_FRAGMENT,
+} from '../FavoriteFoodList';
 
 const USER_QUERY = gql`
   query User($id: ID!) {
     user(id: $id) {
       id
       name
-      favoriteFoods {
-        id
-        foodItem {
-          id
-          name
-        }
-        eatingFrequency
-      }
+      ...FavoriteFoodsListDisplay
     }
   }
+
+  ${FAVORITE_FOODS_LIST_FRAGMENT}
 `;
 
 const User = ({userId}) => (
@@ -38,7 +35,7 @@ const User = ({userId}) => (
             {data.user.name}
             &#39;s favorite foods:
           </h2>
-          <FavoriteFoodList favoriteFoods={data.user.favoriteFoods} />
+          <FavoriteFoodList user={data.user} />
         </React.Fragment>
       );
     }}

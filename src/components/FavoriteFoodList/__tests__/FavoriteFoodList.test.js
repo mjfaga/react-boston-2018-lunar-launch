@@ -5,11 +5,9 @@ import FavoriteFoodList from '../FavoriteFoodList';
 describe('FavoriteFoodList', () => {
   describe('when there are no food items', () => {
     it('renders a list of FavoriteFoodItems', () => {
-      const favoriteFoods = [];
+      const user = {favoriteFoods: []};
 
-      const component = shallow(
-        <FavoriteFoodList favoriteFoods={favoriteFoods} />
-      );
+      const component = shallow(<FavoriteFoodList user={user} />);
 
       expect(component.text()).toEqual('No favorites yet!');
     });
@@ -17,11 +15,11 @@ describe('FavoriteFoodList', () => {
 
   describe('when there are food items', () => {
     it('renders a list of FavoriteFoodItems', () => {
-      const favoriteFoods = [{first: 'firstItem'}, {second: 'secondItem'}];
+      const user = {
+        favoriteFoods: [{first: 'firstItem'}, {second: 'secondItem'}],
+      };
 
-      const component = shallow(
-        <FavoriteFoodList favoriteFoods={favoriteFoods} />
-      );
+      const component = shallow(<FavoriteFoodList user={user} />);
 
       const foodItems = component.find('FavoriteFoodItem');
       expect(foodItems).toHaveLength(2);
