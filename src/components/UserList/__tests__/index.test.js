@@ -3,7 +3,7 @@ import wait from 'waait';
 import renderer from 'react-test-renderer';
 import {MockedProvider} from 'react-apollo/test-utils';
 import {MemoryRouter} from 'react-router-dom';
-import UserList from '../UserList';
+import UserList from '../index';
 import UserListItem from '../UserListItem';
 
 const renderComponent = mocks =>
