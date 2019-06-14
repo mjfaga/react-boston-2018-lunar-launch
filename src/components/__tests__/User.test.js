@@ -6,7 +6,7 @@ import User, {addNewFoodCallback} from '../User';
 
 const renderComponent = (userId, mocks) =>
   mount(
-    <MockedProvider mocks={mocks} addTypename={false}>
+    <MockedProvider mocks={mocks}>
       <User userId={userId} />
     </MockedProvider>
   );
@@ -26,7 +26,12 @@ describe('User', () => {
   describe('when a user is returned', () => {
     it('renders the users profile', async () => {
       const userId = 123;
-      const user = {id: userId, name: 'Mark', favoriteFoods: []};
+      const user = {
+        __typename: 'User',
+        id: userId,
+        name: 'Mark',
+        favoriteFoods: [],
+      };
       const mocks = [
         {
           request: {

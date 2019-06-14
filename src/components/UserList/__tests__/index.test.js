@@ -9,7 +9,7 @@ import UserListItem from '../UserListItem';
 const renderComponent = mocks =>
   renderer.create(
     <MemoryRouter>
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={mocks}>
         <UserList />
       </MockedProvider>
     </MemoryRouter>
@@ -83,7 +83,10 @@ describe('UserList', () => {
           },
           result: {
             data: {
-              users: [{id: 1, name: 'Mark'}, {id: 2, name: 'Hillary'}],
+              users: [
+                {__typename: 'User', id: 1, name: 'Mark'},
+                {__typename: 'User', id: 2, name: 'Hillary'},
+              ],
             },
           },
         },
@@ -97,12 +100,14 @@ describe('UserList', () => {
       expect(userListItems).toHaveLength(2);
       expect(userListItems[0].props).toEqual({
         user: {
+          __typename: 'User',
           id: 1,
           name: 'Mark',
         },
       });
       expect(userListItems[1].props).toEqual({
         user: {
+          __typename: 'User',
           id: 2,
           name: 'Hillary',
         },
