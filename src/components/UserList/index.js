@@ -1,16 +1,15 @@
 import React from 'react';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
-import UserListItem, {USER_LIST_ITEM_FRAGMENT} from './UserListItem';
+import UserListItem from './UserListItem';
 
 const USER_LIST_QUERY = gql`
   query {
     users {
-      ...UserListItemDisplay
+      id
+      name
     }
   }
-
-  ${USER_LIST_ITEM_FRAGMENT}
 `;
 
 const UserList = () => (
