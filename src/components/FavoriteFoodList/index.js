@@ -1,6 +1,33 @@
-import FavoriteFoodList, {
-  FAVORITE_FOODS_LIST_FRAGMENT,
-} from './FavoriteFoodList';
+import React from 'react';
+import gql from 'graphql-tag';
+import FavoriteFoodItem, {
+  FAVORITE_FOOD_ITEM_FRAGMENT,
+} from './FavoriteFoodItem';
 
-export {FAVORITE_FOODS_LIST_FRAGMENT};
+export const FAVORITE_FOODS_LIST_FRAGMENT = gql`
+  fragment FavoriteFoodsListDisplay on User {
+    favoriteFoods {
+      ...FavoriteFoodItemDisplay
+    }
+  }
+
+  ${FAVORITE_FOOD_ITEM_FRAGMENT}
+`;
+
+const FavoriteFoodList = ({user}) => {
+  if (user.favoriteFoods.length === 0) return <div>No favorites yet!</div>;
+
+  return (
+    <div>
+      <ul>
+        {user.favoriteFoods.map((favoriteFoodItem, index) => (
+          <div key={index}>
+            <FavoriteFoodItem favoriteFoodItem={favoriteFoodItem} />
+          </div>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 export default FavoriteFoodList;

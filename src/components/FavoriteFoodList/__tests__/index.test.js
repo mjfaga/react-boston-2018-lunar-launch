@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import FavoriteFoodList from '../FavoriteFoodList';
+import FavoriteFoodList from '../index';
 
 describe('FavoriteFoodList', () => {
   describe('when there are no food items', () => {
