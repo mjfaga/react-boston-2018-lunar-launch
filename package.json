@@ -12,15 +12,17 @@
     "apollo-boost": "^0.1.16",
     "body-parser": "^1.18.3",
     "child_process": "^1.0.2",
-    "graphql": "^14.0.2",
+    "graphql": "^14.4.1",
     "graphql-tag": "^2.9.2",
     "react": "^16.8.6",
     "react-apollo": "^2.1.11",
     "react-dom": "^16.8.6",
+    "react-relay": "^5.0.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.8",
     "react-test-renderer": "^16.5.2",
+    "relay-runtime": "^5.0.0",
     "require-text": "0.0.1",
     "waait": "^1.0.2"
   },
@@ -37,11 +39,13 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier 'src/**/*.js' --list-different",
-    "prettier:fix": "prettier 'src/**/*.js' --write"
+    "prettier:fix": "prettier 'src/**/*.js' --write",
+    "relay": "relay-compiler --src ./src --schema ./mocks/schema.graphql"
   },
   "devDependencies": {
     "apollo-server": "^2.0.8",
     "apollo-server-express": "^2.1.0",
+    "babel-plugin-relay": "^5.0.0",
     "cypress": "^3.1.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
@@ -58,7 +62,8 @@
     "lunar-core": "^1.0.0",
     "lunar-express": "0.0.3",
     "nodemon": "^1.18.4",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "relay-compiler": "^5.0.0"
   },
   "browserslist": [
     ">0.2%",
