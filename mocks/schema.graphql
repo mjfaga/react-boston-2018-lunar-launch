@@ -14,8 +14,18 @@ type Mutation {
 type User {
   id: ID!
   name: String!
-  favoriteFoods: [FavoriteFoodItem]
   eyeColor: String
+  favoriteFoods(first: Int): FavoriteFoodItemConnection
+}
+
+type FavoriteFoodItemConnection {
+  edges: [FavoriteFoodItemEdge]
+  pageInfo: PageInfo
+}
+
+type FavoriteFoodItemEdge {
+  cursor: String!
+  node: FavoriteFoodItem
 }
 
 type FavoriteFoodItem {
@@ -23,6 +33,13 @@ type FavoriteFoodItem {
   foodItem: FoodItem!
   user: User!
   eatingFrequency: EatingFrequency!
+}
+
+type PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor: String
+  endCursor: String
 }
 
 type FoodItem {

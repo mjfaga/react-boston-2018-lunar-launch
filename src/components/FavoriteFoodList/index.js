@@ -4,13 +4,17 @@ import {createFragmentContainer} from 'react-relay';
 import FavoriteFoodItem from './FavoriteFoodItem';
 
 const FavoriteFoodList = ({user}) => {
-  if (user.favoriteFoods.length === 0) return <div>No favorites yet!</div>;
+  if (user.favoriteFoods.edges.length === 0)
+    return <div>No favorites yet!</div>;
 
   return (
     <div>
       <ul>
-        {user.favoriteFoods.map((favoriteFoodItem, index) => (
-          <FavoriteFoodItem key={index} favoriteFoodItem={favoriteFoodItem} />
+        {user.favoriteFoods.edges.map((favoriteFoodItem, index) => (
+          <FavoriteFoodItem
+            key={index}
+            favoriteFoodItem={favoriteFoodItem.node}
+          />
         ))}
       </ul>
     </div>
@@ -20,8 +24,12 @@ const FavoriteFoodList = ({user}) => {
 export default createFragmentContainer(FavoriteFoodList, {
   user: graphql`
     fragment FavoriteFoodList_user on User {
-      favoriteFoods {
-        ...FavoriteFoodItem_favoriteFoodItem
+      favoriteFoods(first: 10) @connection(key: "User_favoriteFoods") {
+        edges {
+          node {
+            ...FavoriteFoodItem_favoriteFoodItem
+          }
+        }
       }
     }
   `,

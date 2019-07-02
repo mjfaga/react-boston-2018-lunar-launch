@@ -1,6 +1,7 @@
 import React from 'react';
 import graphql from 'babel-plugin-relay/macro';
 import {commitMutation} from 'react-relay';
+import {ConnectionHandler} from 'relay-runtime';
 import relayEnvironment from '../utilities/relayEnvironment';
 
 const ADD_FAVORITE_FOOD_MUTATION = graphql`
@@ -80,14 +81,17 @@ class AddFavoriteFoodToUser extends React.Component {
             updater: store => {
               const newFavoriteFood = store.getRootField('addFavoriteFood');
               const userProxy = store.get(userId);
-              const userFavoriteFoods = userProxy.getLinkedRecords(
-                'favoriteFoods'
+              const favoriteFoods = ConnectionHandler.getConnection(
+                userProxy,
+                'User_favoriteFoods'
               );
-
-              userProxy.setLinkedRecords(
-                [...userFavoriteFoods, newFavoriteFood],
-                'favoriteFoods'
+              const edge = ConnectionHandler.createEdge(
+                store,
+                favoriteFoods,
+                newFavoriteFood,
+                'FavoriteFoodsEdge'
               );
+              ConnectionHandler.insertEdgeAfter(favoriteFoods, edge);
             },
           });
           e.target.reset();

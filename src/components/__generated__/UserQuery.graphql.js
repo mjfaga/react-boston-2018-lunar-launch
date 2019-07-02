@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 59c50c5401033dfa488a9fb3916b88f4
+ * @relayHash 7226b32c63599e62118dcef16b4695fb
  */
 
 /* eslint-disable */
@@ -39,9 +39,19 @@ query UserQuery(
 }
 
 fragment FavoriteFoodList_user on User {
-  favoriteFoods {
-    ...FavoriteFoodItem_favoriteFoodItem
-    id
+  favoriteFoods(first: 10) {
+    edges {
+      node {
+        ...FavoriteFoodItem_favoriteFoodItem
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
   }
 }
 
@@ -84,7 +94,14 @@ v3 = {
   "name": "name",
   "args": null,
   "storageKey": null
-};
+},
+v4 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 10
+  }
+];
 return {
   "kind": "Request",
   "fragment": {
@@ -134,33 +151,103 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "favoriteFoods",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "FavoriteFoodItem",
-            "plural": true,
+            "storageKey": "favoriteFoods(first:10)",
+            "args": (v4/*: any*/),
+            "concreteType": "FavoriteFoodItemConnection",
+            "plural": false,
             "selections": [
-              (v2/*: any*/),
               {
                 "kind": "LinkedField",
                 "alias": null,
-                "name": "foodItem",
+                "name": "edges",
                 "storageKey": null,
                 "args": null,
-                "concreteType": "FoodItem",
-                "plural": false,
+                "concreteType": "FavoriteFoodItemEdge",
+                "plural": true,
                 "selections": [
-                  (v2/*: any*/),
-                  (v3/*: any*/)
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "name": "node",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "FavoriteFoodItem",
+                    "plural": false,
+                    "selections": [
+                      (v2/*: any*/),
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "foodItem",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "FoodItem",
+                        "plural": false,
+                        "selections": [
+                          (v2/*: any*/),
+                          (v3/*: any*/)
+                        ]
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "eatingFrequency",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "__typename",
+                        "args": null,
+                        "storageKey": null
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "cursor",
+                    "args": null,
+                    "storageKey": null
+                  }
                 ]
               },
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
-                "name": "eatingFrequency",
+                "name": "pageInfo",
+                "storageKey": null,
                 "args": null,
-                "storageKey": null
+                "concreteType": "PageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "endCursor",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "hasNextPage",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
               }
             ]
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": null,
+            "name": "favoriteFoods",
+            "args": (v4/*: any*/),
+            "handle": "connection",
+            "key": "User_favoriteFoods",
+            "filters": null
           }
         ]
       }
@@ -170,7 +257,7 @@ return {
     "operationKind": "query",
     "name": "UserQuery",
     "id": null,
-    "text": "query UserQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    id\n    name\n    ...FavoriteFoodList_user\n  }\n}\n\nfragment FavoriteFoodList_user on User {\n  favoriteFoods {\n    ...FavoriteFoodItem_favoriteFoodItem\n    id\n  }\n}\n\nfragment FavoriteFoodItem_favoriteFoodItem on FavoriteFoodItem {\n  id\n  foodItem {\n    id\n    name\n  }\n  eatingFrequency\n}\n",
+    "text": "query UserQuery(\n  $id: ID!\n) {\n  user(id: $id) {\n    id\n    name\n    ...FavoriteFoodList_user\n  }\n}\n\nfragment FavoriteFoodList_user on User {\n  favoriteFoods(first: 10) {\n    edges {\n      node {\n        ...FavoriteFoodItem_favoriteFoodItem\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment FavoriteFoodItem_favoriteFoodItem on FavoriteFoodItem {\n  id\n  foodItem {\n    id\n    name\n  }\n  eatingFrequency\n}\n",
     "metadata": {}
   }
 };

@@ -16,7 +16,9 @@ const mocks = {
   User: (parent, args) => ({
     id: args.id,
     name: faker.name.findName(),
-    favoriteFoods: () => new MockList(5),
+    favoriteFoods: () => ({
+      edges: () => new MockList(5),
+    }),
   }),
   Query: () => ({
     users: () => new MockList(3),
