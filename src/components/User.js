@@ -1,62 +1,47 @@
 import React from 'react';
-import {Query} from 'react-apollo';
-import gql from 'graphql-tag';
-import FavoriteFoodList, {FavoriteFoodList_user} from './FavoriteFoodList';
+import graphql from 'babel-plugin-relay/macro';
+import {QueryRenderer} from 'react-relay';
+import relayEnvironment from '../utilities/relayEnvironment';
+import FavoriteFoodList from './FavoriteFoodList';
 
-const USER_QUERY = gql`
-  query User($id: ID!) {
+const USER_QUERY = graphql`
+  query UserQuery($id: ID!) {
     user(id: $id) {
       id
       name
       ...FavoriteFoodList_user
     }
   }
-
-  ${FavoriteFoodList_user}
 `;
 
-export const addNewFoodCallback = userId => (
-  cache,
-  {data: {addFavoriteFood}}
-) => {
-  const {user} = cache.readQuery({query: USER_QUERY, variables: {id: userId}});
+const userRender = ({error, props}) => {
+  if (error) return <div>An error occurred.</div>;
+  if (!props) {
+    return (
+      <h2>
+        Grabbing favorite foods for {'{'}userId{'}'}...
+      </h2>
+    );
+  }
 
-  cache.writeQuery({
-    query: USER_QUERY,
-    data: {
-      user: {
-        ...user,
-        favoriteFoods: [...user.favoriteFoods, addFavoriteFood],
-      },
-    },
-  });
+  return (
+    <React.Fragment>
+      <h2>
+        {props.user.name}
+        &#39;s favorite foods:
+      </h2>
+      <FavoriteFoodList user={props.user} />
+    </React.Fragment>
+  );
 };
 
 const User = ({userId}) => (
-  <Query query={USER_QUERY} variables={{id: userId}}>
-    {({data, error, loading}) => {
-      if (loading)
-        return (
-          <h2>
-            Grabbing favorite foods for {userId}
-            ...
-          </h2>
-        );
-      if (error) return <div>An error occurred.</div>;
-
-      return (
-        <React.Fragment>
-          <h2>
-            {data.user.name}
-            &#39;s favorite foods:
-          </h2>
-          <FavoriteFoodList user={data.user} />
-        </React.Fragment>
-      );
-    }}
-  </Query>
+  <QueryRenderer
+    environment={relayEnvironment}
+    query={USER_QUERY}
+    variables={{id: userId}}
+    render={userRender}
+  />
 );
-
-User.query = USER_QUERY;
 
 export default User;

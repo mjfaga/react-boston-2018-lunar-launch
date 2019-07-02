@@ -13,7 +13,8 @@ const mocks = {
       'Pad Se Ew',
     ]),
   }),
-  User: () => ({
+  User: (parent, args) => ({
+    id: args.id,
     name: faker.name.findName(),
     favoriteFoods: () => new MockList(5),
   }),

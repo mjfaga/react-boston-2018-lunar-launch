@@ -1,18 +1,7 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import FavoriteFoodItem, {
-  FavoriteFoodItem_favoriteFoods,
-} from './FavoriteFoodItem';
-
-export const FavoriteFoodList_user = gql`
-  fragment FavoriteFoodList_user on User {
-    favoriteFoods {
-      ...FavoriteFoodItem_favoriteFoods
-    }
-  }
-
-  ${FavoriteFoodItem_favoriteFoods}
-`;
+import graphql from 'babel-plugin-relay/macro';
+import {createFragmentContainer} from 'react-relay';
+import FavoriteFoodItem from './FavoriteFoodItem';
 
 const FavoriteFoodList = ({user}) => {
   if (user.favoriteFoods.length === 0) return <div>No favorites yet!</div>;
@@ -28,4 +17,12 @@ const FavoriteFoodList = ({user}) => {
   );
 };
 
-export default FavoriteFoodList;
+export default createFragmentContainer(FavoriteFoodList, {
+  user: graphql`
+    fragment FavoriteFoodList_user on User {
+      favoriteFoods {
+        ...FavoriteFoodItem_favoriteFoodItem
+      }
+    }
+  `,
+});

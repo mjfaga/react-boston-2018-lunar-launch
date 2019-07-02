@@ -1,16 +1,6 @@
 import React from 'react';
-import gql from 'graphql-tag';
-
-export const FavoriteFoodItem_favoriteFoods = gql`
-  fragment FavoriteFoodItem_favoriteFoods on FavoriteFoodItem {
-    id
-    foodItem {
-      id
-      name
-    }
-    eatingFrequency
-  }
-`;
+import graphql from 'babel-plugin-relay/macro';
+import {createFragmentContainer} from 'react-relay';
 
 const FavoriteFoodItem = ({favoriteFoodItem}) => (
   <li>
@@ -19,4 +9,15 @@ const FavoriteFoodItem = ({favoriteFoodItem}) => (
   </li>
 );
 
-export default FavoriteFoodItem;
+export default createFragmentContainer(FavoriteFoodItem, {
+  favoriteFoodItem: graphql`
+    fragment FavoriteFoodItem_favoriteFoodItem on FavoriteFoodItem {
+      id
+      foodItem {
+        id
+        name
+      }
+      eatingFrequency
+    }
+  `,
+});

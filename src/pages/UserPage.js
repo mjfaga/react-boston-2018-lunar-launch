@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import AddFavoriteFoodToUser from '../components/AddFavoriteFoodToUser';
-import User, {addNewFoodCallback} from '../components/User';
+import User from '../components/User';
 
 const UserPage = ({
   match: {
@@ -10,10 +10,7 @@ const UserPage = ({
 }) => (
   <React.Fragment>
     <User userId={userId} />
-    <AddFavoriteFoodToUser
-      userId={userId}
-      updateCallback={addNewFoodCallback(userId)}
-    />
+    <AddFavoriteFoodToUser userId={userId} />
     <Link to="/">&lt;&lt; Back</Link>
   </React.Fragment>
 );
