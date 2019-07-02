@@ -9,13 +9,10 @@
   "author": "mjfaga",
   "license": "MIT",
   "dependencies": {
-    "apollo-boost": "^0.1.16",
     "body-parser": "^1.18.3",
     "child_process": "^1.0.2",
     "graphql": "^14.4.1",
-    "graphql-tag": "^2.9.2",
     "react": "^16.8.6",
-    "react-apollo": "^2.1.11",
     "react-dom": "^16.8.6",
     "react-relay": "^5.0.0",
     "react-router": "^5.0.1",
