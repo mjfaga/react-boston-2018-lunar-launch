@@ -15,6 +15,7 @@ type User {
   id: ID!
   name: String!
   favoriteFoods: [FavoriteFoodItem]
+  eyeColor: String
 }
 
 type FavoriteFoodItem {

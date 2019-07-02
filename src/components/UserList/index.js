@@ -1,38 +1,40 @@
 import React from 'react';
-import {Query} from 'react-apollo';
-import gql from 'graphql-tag';
-import UserListItem, {USER_LIST_ITEM_FRAGMENT} from './UserListItem';
+import graphql from 'babel-plugin-relay/macro';
+import {QueryRenderer} from 'react-relay';
+import relayEnvironment from '../../utilities/relayEnvironment';
+import UserListItem from './UserListItem';
 
-const USER_LIST_QUERY = gql`
-  query {
+const USER_LIST_QUERY = graphql`
+  query UserListQuery {
     users {
-      ...UserListItemDisplay
+      ...UserListItem_user
     }
   }
-
-  ${USER_LIST_ITEM_FRAGMENT}
 `;
 
-const UserList = () => (
-  <Query query={USER_LIST_QUERY}>
-    {({data, error, loading}) => {
-      if (loading) return <div>Loading...</div>;
-      if (error && error.networkError) return <div>{error.message}</div>;
-      if (error && error.graphQLErrors)
-        return <div>{`GraphQL error: ${error.graphQLErrors[0].message}`}</div>;
-      if (data.users.length === 0)
-        return <div>You don&#39;t have any users yet!</div>;
+const userListRender = ({error, props}) => {
+  if (error && error.networkError) return <div>{error.message}</div>;
+  if (error && error.graphQLErrors)
+    return <div>{`GraphQL error: ${error.graphQLErrors[0].message}`}</div>;
+  if (!props) return <div>Loading...</div>;
+  if (props.users.length === 0)
+    return <div>You don&#39;t have any users yet!</div>;
 
-      return (
-        <ul className="user-list">
-          {data.users.map((user, index) => (
-            <UserListItem user={user} key={index} />
-          ))}
-        </ul>
-      );
-    }}
-  </Query>
+  return (
+    <ul className="user-list">
+      {props.users.map((user, index) => (
+        <UserListItem user={user} key={index} />
+      ))}
+    </ul>
+  );
+};
+
+const UserList = () => (
+  <QueryRenderer
+    environment={relayEnvironment}
+    query={USER_LIST_QUERY}
+    render={userListRender}
+  />
 );
-UserList.query = USER_LIST_QUERY;
 
 export default UserList;

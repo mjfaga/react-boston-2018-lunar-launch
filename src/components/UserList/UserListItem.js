@@ -1,13 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import gql from 'graphql-tag';
-
-export const USER_LIST_ITEM_FRAGMENT = gql`
-  fragment UserListItemDisplay on User {
-    id
-    name
-  }
-`;
+import graphql from 'babel-plugin-relay/macro';
+import {createFragmentContainer} from 'react-relay';
 
 const UserListItem = ({user}) => (
   <li>
@@ -15,4 +9,11 @@ const UserListItem = ({user}) => (
   </li>
 );
 
-export default UserListItem;
+export default createFragmentContainer(UserListItem, {
+  user: graphql`
+    fragment UserListItem_user on User {
+      id
+      name
+    }
+  `,
+});
