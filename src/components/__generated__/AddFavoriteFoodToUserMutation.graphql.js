@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f5b5284165a2e7f340495ec450433e18
+ * @relayHash c9eec6299bed761b7a18bb3755af6586
  */
 
 /* eslint-disable */
@@ -17,12 +17,16 @@ export type AddFavoriteFoodToUserMutationVariables = {|
 |};
 export type AddFavoriteFoodToUserMutationResponse = {|
   +addFavoriteFood: ?{|
-    +id: string,
-    +foodItem: {|
-      +id: string,
-      +name: string,
-    |},
-    +eatingFrequency: EatingFrequency,
+    +favoriteFoodEdge: ?{|
+      +node: ?{|
+        +id: string,
+        +foodItem: {|
+          +id: string,
+          +name: string,
+        |},
+        +eatingFrequency: EatingFrequency,
+      |}
+    |}
   |}
 |};
 export type AddFavoriteFoodToUserMutation = {|
@@ -39,12 +43,16 @@ mutation AddFavoriteFoodToUserMutation(
   $eatingFrequency: EatingFrequency!
 ) {
   addFavoriteFood(userId: $userId, name: $name, eatingFrequency: $eatingFrequency) {
-    id
-    foodItem {
-      id
-      name
+    favoriteFoodEdge {
+      node {
+        id
+        foodItem {
+          id
+          name
+        }
+        eatingFrequency
+      }
     }
-    eatingFrequency
   }
 }
 */
@@ -100,35 +108,57 @@ v2 = [
         "variableName": "userId"
       }
     ],
-    "concreteType": "FavoriteFoodItem",
+    "concreteType": "FavoriteFoodItemResponse",
     "plural": false,
     "selections": [
-      (v1/*: any*/),
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "foodItem",
+        "name": "favoriteFoodEdge",
         "storageKey": null,
         "args": null,
-        "concreteType": "FoodItem",
+        "concreteType": "FavoriteFoodItemEdge",
         "plural": false,
         "selections": [
-          (v1/*: any*/),
           {
-            "kind": "ScalarField",
+            "kind": "LinkedField",
             "alias": null,
-            "name": "name",
+            "name": "node",
+            "storageKey": null,
             "args": null,
-            "storageKey": null
+            "concreteType": "FavoriteFoodItem",
+            "plural": false,
+            "selections": [
+              (v1/*: any*/),
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "foodItem",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "FoodItem",
+                "plural": false,
+                "selections": [
+                  (v1/*: any*/),
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "name",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "eatingFrequency",
+                "args": null,
+                "storageKey": null
+              }
+            ]
           }
         ]
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "eatingFrequency",
-        "args": null,
-        "storageKey": null
       }
     ]
   }
@@ -153,11 +183,11 @@ return {
     "operationKind": "mutation",
     "name": "AddFavoriteFoodToUserMutation",
     "id": null,
-    "text": "mutation AddFavoriteFoodToUserMutation(\n  $userId: ID!\n  $name: String!\n  $eatingFrequency: EatingFrequency!\n) {\n  addFavoriteFood(userId: $userId, name: $name, eatingFrequency: $eatingFrequency) {\n    id\n    foodItem {\n      id\n      name\n    }\n    eatingFrequency\n  }\n}\n",
+    "text": "mutation AddFavoriteFoodToUserMutation(\n  $userId: ID!\n  $name: String!\n  $eatingFrequency: EatingFrequency!\n) {\n  addFavoriteFood(userId: $userId, name: $name, eatingFrequency: $eatingFrequency) {\n    favoriteFoodEdge {\n      node {\n        id\n        foodItem {\n          id\n          name\n        }\n        eatingFrequency\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '3afb388ff92a4a326e5d227cd13ed2da';
+(node/*: any*/).hash = 'ce85cd9502fd71580c248d8c98aec0f3';
 module.exports = node;

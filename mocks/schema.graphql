@@ -8,7 +8,11 @@ type Mutation {
     userId: ID!
     name: String!
     eatingFrequency: EatingFrequency!
-  ): FavoriteFoodItem
+  ): FavoriteFoodItemResponse
+}
+
+type FavoriteFoodItemResponse {
+  favoriteFoodEdge: FavoriteFoodItemEdge
 }
 
 type User {
