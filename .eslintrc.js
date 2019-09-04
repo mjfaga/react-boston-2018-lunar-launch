@@ -1,12 +1,22 @@
+const requireText = require('require-text');
+const typeDefs = requireText('./mocks/schema.graphql', require);
+
 module.exports = {
   env: {
     browser: true,
     node: true,
     'jest/globals': true,
   },
-  plugins: ['jest', 'import', 'filenames'],
+  plugins: ['jest', 'import', 'filenames', 'graphql'],
   extends: ['ezcater-base', 'plugin:jest/recommended'],
   rules: {
+    'graphql/template-strings': [
+      'error',
+      {
+        env: 'apollo',
+        schemaString: typeDefs,
+      },
+    ],
     'filenames/match-regex': ['error', '^[.a-zA-Z0-9]+$'],
     'filenames/match-exported': 'error',
     'import/default': 'error',
