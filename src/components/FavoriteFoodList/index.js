@@ -21,9 +21,7 @@ const FavoriteFoodList = ({user}) => {
     <div>
       <ul>
         {user.favoriteFoods.map((favoriteFoodItem, index) => (
-          <div key={index}>
-            <FavoriteFoodItem favoriteFoodItem={favoriteFoodItem} />
-          </div>
+          <FavoriteFoodItem key={index} favoriteFoodItem={favoriteFoodItem} />
         ))}
       </ul>
     </div>
