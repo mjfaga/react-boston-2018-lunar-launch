@@ -1,17 +1,17 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import FavoriteFoodItem, {
-  FAVORITE_FOOD_ITEM_FRAGMENT,
+  FavoriteFoodItem_favoriteFoods,
 } from './FavoriteFoodItem';
 
-export const FAVORITE_FOODS_LIST_FRAGMENT = gql`
-  fragment FavoriteFoodsListDisplay on User {
+export const FavoriteFoodList_user = gql`
+  fragment FavoriteFoodList_user on User {
     favoriteFoods {
-      ...FavoriteFoodItemDisplay
+      ...FavoriteFoodItem_favoriteFoods
     }
   }
 
-  ${FAVORITE_FOOD_ITEM_FRAGMENT}
+  ${FavoriteFoodItem_favoriteFoods}
 `;
 
 const FavoriteFoodList = ({user}) => {

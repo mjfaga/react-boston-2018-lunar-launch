@@ -1,20 +1,18 @@
 import React from 'react';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
-import FavoriteFoodList, {
-  FAVORITE_FOODS_LIST_FRAGMENT,
-} from './FavoriteFoodList';
+import FavoriteFoodList, {FavoriteFoodList_user} from './FavoriteFoodList';
 
 const USER_QUERY = gql`
   query User($id: ID!) {
     user(id: $id) {
       id
       name
-      ...FavoriteFoodsListDisplay
+      ...FavoriteFoodList_user
     }
   }
 
-  ${FAVORITE_FOODS_LIST_FRAGMENT}
+  ${FavoriteFoodList_user}
 `;
 
 export const addNewFoodCallback = userId => (

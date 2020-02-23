@@ -52,6 +52,7 @@ module.exports = {
         printWidth: 80,
       },
     ],
+    camelcase: 'off',
   },
   parser: 'babel-eslint',
   root: true,
